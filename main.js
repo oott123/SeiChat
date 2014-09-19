@@ -32,19 +32,4 @@ app.on('ready', function() {
             web.executeJavaScript(js);
         });
     });
-    var protocol = require('protocol');
-    protocol.registerProtocol('seichat', function(request) {
-        var url = require('url');
-        var querystring = require('querystring');
-        var parsed = url.parse(request.url);
-        var query = querystring.parse(parsed.query);
-        var dialog = require('dialog');
-        dialog.showMessageBox(null , {
-            message: 'url',
-            buttons: ['OK']
-        });
-        return new protocol.RequestStringJob({
-            data: ''
-        });
-    });
 });
