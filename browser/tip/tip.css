@@ -1,0 +1,55 @@
+body{
+	padding: 0;
+	margin: 0;
+	font-family: "微软雅黑";
+	overflow: hidden;
+}
+.row{
+	background-color: #f8f8f8;
+	width: 320px;
+	height: 76px;
+	padding-bottom: 5px;
+	border-bottom: 1px dashed #ccc;
+	clear: both;
+}
+.avatar{
+	height: 44px;
+	width: 44px;
+	float: left;
+	padding: 16px;
+}
+.details{
+	padding-left: 80px;
+	padding-top: 10px;
+	padding-right: 20px;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+.sender{
+	height: 24px;
+	line-height: 24px;
+	font-size: 12px;
+	color: #433889;
+	font-weight: bold;
+	overflow: hidden;
+}
+.content{
+	height: 46px;
+	line-height: 23px;
+	font-size: 12px;
+	color: #333;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.close{
+	float: right;
+	cursor: pointer;
+	width: 22px;
+	height: 22px;
+	line-height: 22px;
+	text-align: center;
+	font-weight: bold;
+}
+.close:hover{
+	background-color: #ccc;
+}
