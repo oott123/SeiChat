@@ -35,8 +35,9 @@
 			</div>
 		</div>
 		<div class="ctrls">
-			<button>确定</button>
-			<button>取消</button>
+			<button v-on="click: saveAndClose">确定</button>
+			<button v-on="click: closeWindow">取消</button>
+			<button v-attr="disabled: configNotChanged" v-on="click: saveConfig">应用</button>
 		</div>
 		<script type="text/javascript" src="../vue.min.js"></script>
 		<script type="text/javascript" src="config.js"></script>

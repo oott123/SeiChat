@@ -77,6 +77,9 @@ app.on('ready', function() {
                 cfgWindow.on('closed', function() {
                     cfgWindow = null;   //GC
                 });
+                if(debug){
+                    cfgWindow.openDevTools();    //测试：打开调试窗口
+                }
             }
         },{
             label: '退出',
