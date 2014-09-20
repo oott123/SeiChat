@@ -36,11 +36,15 @@ app.on('ready', function() {
         },
         icon: icon
     });
-    mainWindow.loadUrl('https://wx.qq.com');
+    mainWindow.loadUrl('https://wx.qq.com/?lang=zh_CN');
     if(debug){
         mainWindow.toggleDevTools();    //测试：打开调试窗口
     }
     mainWindow.on('close', function(event){
+        var canClose = !config.items.hideOnClose;
+        if(canClose){
+            return true;
+        }
         if(mainWindow.isVisible()){
             mainWindow.hide();
             event.preventDefault();
@@ -82,6 +86,7 @@ app.on('ready', function() {
                 if(debug){
                     cfgWindow.openDevTools();    //测试：打开调试窗口
                 }
+                cfgWindow.webContents.executeJavaScript('vm.setValue('+ JSON.stringify(config.items) +')');
             }
         },{
             label: '退出',
@@ -107,6 +112,11 @@ app.on('ready', function() {
     var closeTimeoutID = null;
     ipc.on('new-message', function(event, arg){
         if(arg.isSend || !arg.unread){
+            return;
+        }
+        //检查配置
+        var canShow = config.items.tipWinCondition == 'always' || (config.items.tipWinCondition == 'auto' && !mainWindow.isVisible());
+        if(!canShow){
             return;
         }
         //检查是否已经有了消息接口
@@ -145,7 +155,7 @@ app.on('ready', function() {
         }
         closeTimeoutID = setTimeout(function(){
             msgWindow.close();
-        }, 8000);
+        }, config.items.hideTimeout);
     });
     ipc.on('message-close', function(event, remainMessages){
         if(remainMessages == 0){
