@@ -9,6 +9,8 @@ var ipc = require('ipc');
 var Menu = require('menu');
 var Tray = require('tray');
 
+var config = require('./config');
+
 var mainWindow = null;
 var msgWindow = null;
 var cfgWindow = null;
@@ -154,5 +156,11 @@ app.on('ready', function() {
             var pos = msgWindow.getPosition();
             msgWindow.setPosition(pos[0], pos[1] + msgHeight);
         }
+    });
+    ipc.on('close-config-window', function(event){
+        cfgWindow.close();
+    });
+    ipc.on('save-config', function(event, data){
+        config.save(data);
     });
 });
