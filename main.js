@@ -52,6 +52,7 @@ app.on('ready', function() {
             mainWindow.hide();
         }else{
             mainWindow.show();
+            mainWindow.focus();
         }
     };
     //写入托盘图标
