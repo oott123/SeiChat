@@ -11,6 +11,7 @@ var Tray = require('tray');
 
 var mainWindow = null;
 var msgWindow = null;
+var cfgWindow = null;
 
 var debug = false;
 for(var i=0; i<process.argv.length; i++){
@@ -56,18 +57,33 @@ app.on('ready', function() {
         }
     };
     //写入托盘图标
-    var trayMenu = Menu.buildFromTemplate([
-        {
+    var trayMenu = Menu.buildFromTemplate([{
             label: '显示/隐藏',
             click: showHide
-        },
-        {
+        },{
+            label: '设置',
+            click: function(){
+                if(cfgWindow){
+                    cfgWindow.focus();
+                    return;
+                }
+                cfgWindow = new BrowserWindow({
+                    height: 400,
+                    width: 600,
+                    resizable: false,
+                    icon: icon
+                });
+                cfgWindow.loadUrl('file://' + __dirname + '/browser/config/index.html');
+                cfgWindow.on('closed', function() {
+                    cfgWindow = null;   //GC
+                });
+            }
+        },{
             label: '退出',
             click: function(){
                 app.exit();
             }
-        },
-    ]);
+        }]);
     var trayIcon = new Tray(icon);
     trayIcon.setToolTip('SeiChat');
     trayIcon.setContextMenu(trayMenu);
