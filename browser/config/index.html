@@ -6,30 +6,32 @@
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<div class="row" v-repeat="item: configItems">
-			<div class="separator item" v-if="item.type=='separator'">
-				{{item.title}}
-			</div>
-			<div class="config item checkbox" v-if="item.type=='checkbox'">
-				<input type="checkbox" id="{{item.key}}"
-						   v-model="item.value">
-				<label for="{{item.key}}">
+		<div class="container">
+			<div class="row" v-repeat="item: configItems">
+				<div class="separator item" v-if="item.type=='separator'">
 					{{item.title}}
-				</label>
-			</div>
-			<div class="config item select" v-if="item.type=='select'">
-				<label for="{{item.key}}">{{item.title}}</label>
-				<select id="{{item.key}}" v-model="item.value">
-					<option v-repeat="option: item.options" value="{{option.key}}">
-						{{option.title}}
-					</option>
-				</select>
-			</div>
-			<div class="config item text" v-if="item.type == 'text'">
-				<label for="{{item.key}}">
-					{{item.title}}
-				</label>
-				<input type="text" id="{{item.key}}" v-model="item.value">
+				</div>
+				<div class="config item checkbox" v-if="item.type=='checkbox'">
+					<input type="checkbox" id="{{item.key}}"
+							   v-model="item.value">
+					<label for="{{item.key}}">
+						{{item.title}}
+					</label>
+				</div>
+				<div class="config item select" v-if="item.type=='select'">
+					<label for="{{item.key}}">{{item.title}}</label>
+					<select id="{{item.key}}" v-model="item.value">
+						<option v-repeat="option: item.options" value="{{option.key}}">
+							{{option.title}}
+						</option>
+					</select>
+				</div>
+				<div class="config item text" v-if="item.type == 'text'">
+					<label for="{{item.key}}">
+						{{item.title}}
+					</label>
+					<input type="text" id="{{item.key}}" v-model="item.value">
+				</div>
 			</div>
 		</div>
 		<div class="ctrls">

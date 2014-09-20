@@ -1,4 +1,4 @@
-body, input, select{
+body, input, select, button{
     font-family: "微软雅黑";
 }
 .item.separator {
@@ -23,7 +23,7 @@ input{
     height: 20px;
 }
 select{
-    width: 236px;
+    width: 234px;
     height: 26px;
 }
 .item {
@@ -35,4 +35,30 @@ select{
 }
 .item.checkbox input {
     width: auto;
+}
+.container {
+    padding-bottom: 60px;
+}
+.ctrls {
+    height: 48px;
+    width: 100%;
+    box-shadow: 0px -3px 5px 0px rgba(50, 50, 50, 0.25);
+    margin-top: 15px;
+    background: #fff;
+    position: fixed;
+    bottom: 0px;
+    text-align: right;
+    line-height: 48px;
+    padding-right: 18px;
+    right: 0px;
+}
+.ctrls button {
+    line-height: 24px;
+    font-size: 12px;
+    font-family: "微软雅黑";
+    padding-left: 18px;
+    padding-right: 18px;
+}
+body {
+    margin: 0;
 }
