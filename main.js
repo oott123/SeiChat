@@ -110,6 +110,19 @@ app.on('ready', function() {
     //监听接口
     var msgWidth = 320, msgHeight = 80;
     var closeTimeoutID = null;
+    var setDelayClose = function(){
+        if(closeTimeoutID){
+            clearTimeout(closeTimeoutID);
+        }
+        if(config.items.hideTimeout <= 0){
+            return false;
+        }
+        closeTimeoutID = setTimeout(function(){
+            if(msgWindow){
+                msgWindow.close();
+            }
+        }, config.items.hideTimeout);
+    }
     ipc.on('new-message', function(event, arg){
         if(arg.isSend || !arg.unread){
             return;
@@ -153,11 +166,7 @@ app.on('ready', function() {
                 closeTimeoutID = null;
             });
         }
-        closeTimeoutID = setTimeout(function(){
-            if(msgWindow){
-                msgWindow.close();
-            }
-        }, config.items.hideTimeout);
+        setDelayClose();
     });
     ipc.on('message-close', function(event, remainMessages){
         if(remainMessages == 0){
@@ -170,6 +179,12 @@ app.on('ready', function() {
             var pos = msgWindow.getPosition();
             msgWindow.setPosition(pos[0], pos[1] + msgHeight);
         }
+    });
+    ipc.on('message-delay', function(){
+        setDelayClose();
+    });
+    ipc.on('message-do-not-close', function(){
+        clearTimeout(closeTimeoutID);
     });
     ipc.on('close-config-window', function(event){
         cfgWindow.close();
