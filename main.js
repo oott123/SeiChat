@@ -192,4 +192,24 @@ app.on('ready', function() {
     ipc.on('save-config', function(event, data){
         config.save(data);
     });
+    ipc.on('call-webmm', function(event, data){
+        //执行WebMM的逻辑js
+        //data:{
+        //  call: 'logic',
+        //  sub: 'sendMsg',
+        //  method: 'sendText'
+        //  data: {
+        //      Msg: {
+        //          FromUserName: "",
+        //          ToUserName: "",
+        //          Type: 1,
+        //          Content: "the quick brown fox jumps over the lazy dog"
+        //      }
+        //  }
+        //}
+        mainWindow.webContents.executeJavaScript("WebMM." + data.call + 
+            "('" + data.sub + "')." + data.method + "(" +
+            JSON.stringify(data.data) + ",{});"
+        );
+    });
 });
