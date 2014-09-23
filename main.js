@@ -127,6 +127,10 @@ app.on('ready', function() {
         if(arg.isSend || !arg.unread){
             return;
         }
+        if(!mainWindow.isFocused()){
+            //焦点不在时才闪烁，否则超级鬼畜的，不信你试试？
+            mainWindow.flashFrame(true);
+        }
         //检查配置
         var canShow = config.items.tipWinCondition == 'always' || (config.items.tipWinCondition == 'auto' && !mainWindow.isVisible());
         if(!canShow){
