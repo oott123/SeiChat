@@ -38,6 +38,14 @@ var vm = new Vue({
 			key: 'hideTimeout',
 			title: '浮窗显示时间（毫秒）',
 			value: ''
+		},{
+			type: 'separator',
+			title: '浮框回复设置'
+		},{
+			type: 'checkbox',
+			key: 'closeOnReply',
+			title: '回复后自动关闭浮框',
+			value: false
 		}],
 		configNotChanged: true
 	},

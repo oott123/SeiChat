@@ -1,10 +1,14 @@
 try{
 	var ipc = require('ipc');
+	var config = require('remote').require('./config').items;
 }catch(e){
 	var ipc = {
 		send:function(chn, data){console.log('sent ' + chn, data)},
 		debug:1
 	};
+	var config = {
+		closeOnReply: true
+	}
 }
 
 var vm = new Vue({
@@ -24,7 +28,7 @@ var vm = new Vue({
 			ipc.send('message-delay');
 		},
 		sendChat: function(originMessage){
-			console.log(this);
+			console.log(originMessage);
 			var data = {
 				call: 'logic',
 				sub: 'sendMsg',
@@ -41,6 +45,9 @@ var vm = new Vue({
 			ipc.send('call-webmm', data);
 			originMessage.reply = '';
 			originMessage.doReply = false;
+			if(config.closeOnReply){
+				this.close(originMessage.$index);
+			}
 		},
 		cancelReply: function(item){
 			item.doReply = false;
