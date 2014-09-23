@@ -5,13 +5,19 @@
 		<link href="tip.css" rel="stylesheet" />
 		<meta charset="utf-8" />
 	</head>
-	<body v-on="mouseenter: mEnter,mouseleave: mLeave">
+	<body v-on="mouseover: mEnter,mouseleave: mLeave">
 		<div class="row" v-repeat="item: messages">
 			<img src="https://wx.qq.com{{item.avatar}}" class="avatar">
 			<div class="close" v-on="click: close($index)">×</div>
-			<div class="details">
+			<div class="details" v-on="click: doReply(item, this)">
 				<div class="sender">{{item.avatarTitle}}</div>
 				<div class="content">{{item.Content}}</div>
+			</div>
+			<div class="reply" v-if="item.doReply">
+				<textarea placeholder="请输入回复文字，按 Enter 键发送。"
+						  v-on="keyup:sendChat(item) | key enter,
+						  		keyup:cancelReply(item) | key esc" v-model="item.reply"
+				></textarea>
 			</div>
 		</div>
 		<script type="text/javascript" src="../vue.min.js"></script>

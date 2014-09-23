@@ -4,6 +4,9 @@ body{
 	font-family: "微软雅黑";
 	overflow: hidden;
 }
+textarea{
+	font-family: "微软雅黑";
+}
 .row{
 	background-color: #f8f8f8;
 	width: 320px;
@@ -11,6 +14,7 @@ body{
 	padding-bottom: 5px;
 	border-bottom: 1px dashed #ccc;
 	clear: both;
+	position: relative;
 }
 .avatar{
 	height: 44px;
@@ -52,4 +56,13 @@ body{
 }
 .close:hover{
 	background-color: #ccc;
+}
+.reply{
+	position: absolute;
+	top: 12px;
+	left: 80px;
+}
+.reply textarea{
+	width: 210px;
+	height: 57px;
 }
