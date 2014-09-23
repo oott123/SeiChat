@@ -154,12 +154,16 @@ app.on('ready', function() {
             });
         }
         closeTimeoutID = setTimeout(function(){
-            msgWindow.close();
+            if(msgWindow){
+                msgWindow.close();
+            }
         }, config.items.hideTimeout);
     });
     ipc.on('message-close', function(event, remainMessages){
         if(remainMessages == 0){
-            msgWindow.close();
+            if(msgWindow){
+                msgWindow.close();
+            }
         }else{
             var size = msgWindow.getSize();
             msgWindow.setSize(size[0], size[1] - msgHeight);
