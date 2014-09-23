@@ -13,6 +13,12 @@ var vm = new Vue({
 		close: function(index){
 			vm.$data.messages.$remove(index);
 			ipc.send('message-close', vm.$data.messages.length);
+		},
+		mEnter: function(){
+			ipc.send('message-do-not-close');
+		},
+		mLeave: function(){
+			ipc.send('message-delay');
 		}
 	}
 });
